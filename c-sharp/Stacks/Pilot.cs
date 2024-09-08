@@ -1,6 +1,4 @@
-﻿
-
-namespace c_sharp.Stacks
+﻿namespace c_sharp.Stacks
 {
     internal class Pilot
     {
@@ -10,50 +8,98 @@ namespace c_sharp.Stacks
 
         public static void Enter()
         {
-            Push("Ashish");
-            Push("Mausam");
-            Push("Rabin");
-            Push("muksham");
-            Push("Luffy");
-            Push("Duffer");// stack overflow as the array is full at this point
-            Console.WriteLine("After push operation");
-            PrintStack(names);
-            Pop();
-            Pop();
-            Console.WriteLine("After pop operation");
-            PrintStack(names);
+            while (true)
+            {
+                Console.WriteLine();
+                Console.WriteLine("1. Push");
+                Console.WriteLine("2. Pop");
+                Console.WriteLine("3. Print the top Element.");
+                Console.WriteLine("4. Print all Elements");
+                Console.WriteLine("5. Exit");
+                Console.WriteLine("Please Select an option: ");
+                int option = Convert.ToInt32(Console.ReadLine());
+
+                switch (option)
+                {
+                    case 1:
+                        Console.WriteLine("Enter name to push:");
+                        string name = Console.ReadLine();
+                        Push(name);
+                        break;
+                    case 2:
+                        string data = Pop();
+                        Console.WriteLine("Element to be deleted {0}",data);
+                        break;
+                    case 3:
+                        if (!isEmpty())
+                            Console.WriteLine(names[top]);
+                        else
+                            Console.WriteLine("Stack is empty.");
+                        break;
+                    case 4:
+                        Print();
+                        break;
+                    case 5:
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        Console.WriteLine("Please Choose a correct Option!");
+                        break;
+                }
+            }
         }
 
         // push operation
         public static void Push(string data)
         {
-            if (top == max - 1)
+            if (IsFull())
             {
-                Console.WriteLine("Stack Overflow! Can't Push  {0} in the Stack.",data);
-                //Environment.Exit(0);
+                Console.WriteLine("Stack Overflow! Can't Push \"{0}\" in the Stack.", data);
                 return;
             }
-
             top++;
             names[top] = data;
         }
 
         // pop operation
-        public static void Pop()
+        public static string Pop()
         {
-            if(top == -1)
+            if (isEmpty())
             {
-                Console.WriteLine("No items in the Stack");
-                return;
+                Console.WriteLine("Stack UnderFlow");
+                return null;
             }
-            names[top] = "";
+            string data = names[top];
             top--;
+            return data;
+        }
+
+        // Check if the stack is full
+        public static bool IsFull()
+        {
+            return top == max - 1;
+        }
+
+        // Check if the stack is empty
+        public static bool isEmpty()
+        {
+            return top == -1;
         }
 
         // Print the stack elements
-        public static void PrintStack(string[] arr)
+        public static void Print()
         {
-            foreach(string s in arr) Console.WriteLine(s);
+            if (top == -1)
+            {
+                Console.WriteLine("Stack is empty.");
+                return;
+            }
+
+            for (int i = top; i >= 0; i--)
+            {
+                Console.Write(names[i] + " ");
+            }
+            Console.WriteLine();
         }
     }
 }
