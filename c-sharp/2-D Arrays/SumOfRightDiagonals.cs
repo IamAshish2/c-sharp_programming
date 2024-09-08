@@ -27,11 +27,11 @@ namespace c_sharp._2_D_Arrays
             }
 
             // Calculate the anti diagonal sum
-            for (int i=0;i<rows;i++)
-            {
-                int j = cols - i - 1;
-                if(j >=0 && j < cols) antiDiagonalSum += arr[i, j];
-            }
+            //for (int i=0;i<rows;i++)
+            //{
+            //    int j = cols - i - 1;
+            //    if(j >=0 && j < cols) antiDiagonalSum += arr[i, j];
+            //}
 
             Console.WriteLine("The diagonalSum of the arr is {0}",diagonalSum);
             Console.WriteLine("The antiDiagonalSum of the arr is {0}", antiDiagonalSum);
